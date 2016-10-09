@@ -1,6 +1,12 @@
 # Example of reverse shell communication with `netcat`
 
-This example contains a collection of [ubuntu](https://hub.docker.com/_/ubuntu/) Docker containers, orchestrated with [docker-compose](https://docs.docker.com/compose/) to illustrate the basic mechanics of reverse-shell communication using `netcat`.
+## What are reverse shells?
+[Reverse Shells](http://resources.infosecinstitute.com/icmp-reverse-shell/) like any other shell, execute code on a given machine. The key difference between a reverse shell and a regular remote shell is that communication within a reverse shell flows from the target machine, back to the remote machine.
+
+This behavior is especially attractive to attackers who inject malicous code on target machines behind firewalls. The core idea is that if an attacker can gain access to basic tools like `netcat` on a target machine, potentially any data that the malicous code has access to can be sent out to a remote machine, taking advantage of outgoing ports present in most user-facing network firewalls.
+
+## Example Overview
+This example is a collection of [ubuntu](https://hub.docker.com/_/ubuntu/) Docker containers, orchestrated with [docker-compose](https://docs.docker.com/compose/) to illustrate the basic mechanics of reverse-shell communication between a client and a server posing as a web server. The example uses an unencrypted `8080/tcp` connection for easy of development. Stay tuned for an example which takes advatiage of SSL encryption.
 
 ```
 .
@@ -15,7 +21,7 @@ This example contains a collection of [ubuntu](https://hub.docker.com/_/ubuntu/)
 
 ### Build the `develop-net` base image
 
-This image uses in `netcat` for implementing the reverse shell, while `telnet` and `iputils-ping` are only installed for purposes like testing connectivity.
+This image uses `netcat` for implementing the reverse shell, while `telnet` and `iputils-ping` are only installed for purposes like testing connectivity.
 
 ```
 $ docker build -t infosecrnd/develop-net develop-net/
